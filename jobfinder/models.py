@@ -8,6 +8,25 @@
 from django.db import models
 
 
+class JobListOld20180319(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    city = models.TextField(blank=True, null=True)
+    job = models.TextField(blank=True, null=True)
+    company = models.TextField(blank=True, null=True)
+    salary = models.FloatField(blank=True, null=True)
+    experience = models.TextField(blank=True, null=True)
+    area = models.TextField(blank=True, null=True)
+    scale = models.TextField(blank=True, null=True)
+    attraction = models.TextField(blank=True, null=True)
+    finacing = models.TextField(blank=True, null=True)
+    pubdate = models.TextField(blank=True, null=True)
+    url = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = '_job_list_old_20180319'
+
+
 class AuthGroup(models.Model):
     id = models.IntegerField(primary_key=True)  # AutoField?
     name = models.CharField(unique=True, max_length=80)
@@ -132,8 +151,9 @@ class JobList(models.Model):
     city = models.TextField(blank=True, null=True)
     job = models.TextField(blank=True, null=True)
     company = models.TextField(blank=True, null=True)
-    salary = models.FloatField(blank=True, null=True)
+    salary = models.TextField(blank=True, null=True)
     experience = models.TextField(blank=True, null=True)
+    education = models.TextField(blank=True, null=True)
     area = models.TextField(blank=True, null=True)
     scale = models.TextField(blank=True, null=True)
     attraction = models.TextField(blank=True, null=True)

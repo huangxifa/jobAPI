@@ -18,6 +18,10 @@ from jobfinder.lagou.config import myheaders
 from jobfinder.lagou.savedata import myexcel
 from jobfinder.models import JobList
 
+import django
+
+django.setup()
+
 
 class myspider(object):
     def __init__(self, mykey, mycity):
@@ -61,19 +65,19 @@ class myspider(object):
             else:
                 s = "None"
             link = "https://www.lagou.com/jobs/{}.html".format(data["positionId"])
-            job= JobList(
-            data["city"]
-            ,data["positionName"]
-            ,data["companyFullName"]
-            ,data["salary"]
-            ,data["workYear"]
-            ,data["education"]
-            ,data["district"]
-            ,data["companySize"]
-            ,s
-            , data["financeStage"]
-            , data["createTime"]
-            ,link
+            job = JobList(
+                city=data["city"]
+                , job=data["positionName"]
+                , company=data["companyFullName"]
+                , salary=data["salary"]
+                , experience=data["workYear"]
+                , education=data["education"]
+                , area=data["district"]
+                , scale=data["companySize"]
+                , attraction=s
+                , finacing=data["financeStage"]
+                , pubdate=data["createTime"]
+                , url=link
             )
             # self.excel.writeinfos(self.i, each)
             # self.i += 1
@@ -88,15 +92,12 @@ class myspider(object):
         # self.excel.save_excel()
         print("所有信息保存完毕！")
 
-
-if __name__ == '__main__':
-    # 城市为空的时候代表全国
-    spider = myspider("Python", "深圳")
-    job_type=['java','python','php','go','前端','ruby','大数据']
-    city_area=['武汉','北京','上海','广州','深圳','杭州']
-    for job in job_type:
-        for city in city_area:
-            spider = myspider(job, city)
-            spider.main()
-
-
+# if __name__ == '__main__':
+#     # 城市为空的时候代表全国
+#     spider = myspider("Python", "深圳")
+#     job_type=['java','python','php','go','前端','ruby','大数据']
+#     city_area=['武汉','北京','上海','广州','深圳','杭州']
+#     for job in job_type:
+#         for city in city_area:
+#             spider = myspider(job, city)
+#             spider.main()
