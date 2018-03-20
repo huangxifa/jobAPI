@@ -22,8 +22,10 @@
 入数据库中数据过于陈旧，也可在执行一次，爬取最新的数据：
 触发方式,在浏览器中输入如下url:
 > htttp://localhost:8000/excute
+
 5. 查看对应的api,比如
 > http://localhost:8000/job/rest/joblist?id=&city=武汉
 
-
+## 运行效果如下：
+![image](https://github.com/huangxifa/job/blob/master/jobfinder/django_rest_framework.png)
 
