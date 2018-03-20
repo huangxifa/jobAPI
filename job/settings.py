@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jobfinder',
+    'rest_framework',
+    'django_filters',
+    'widget_tweaks',
 
 ]
 
@@ -71,6 +74,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'job.wsgi.application'
 
+
+REST_FRAMEWORK = {
+    # 分页查询
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.CursorPagination',
+    # 使支持django-filter 的条件筛选
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    'PAGE_SIZE': 5,
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases

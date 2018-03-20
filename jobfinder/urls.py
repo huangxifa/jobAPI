@@ -1,5 +1,5 @@
 from django.urls import path
-from jobfinder import views
+from jobfinder import views,rest_model
 
 app_name = "jobfinder"
 #
@@ -9,6 +9,8 @@ app_name = "jobfinder"
 urlpatterns = [
     # default index
     # path('home', views.home, name="home"),
-    # 销售订单管理
-    path('excute',views.excute, name='index')
-    ]
+    # 执行爬虫的触发url
+    path('excute',views.excute, name='index'),
+    path("rest/joblist", rest_model.Jobdetail.as_view(), name="rest_job"),
+
+]

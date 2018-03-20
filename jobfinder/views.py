@@ -1,8 +1,9 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+
+from jobfinder.lagou.lagouspider import myspider
+
 
 # Create your views here.
-from jobfinder.lagou.lagouspider import myspider
 
 
 def excute(request):

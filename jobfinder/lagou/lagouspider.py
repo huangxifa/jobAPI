@@ -1,13 +1,6 @@
 # -*- coding:utf-8 -*-
 # date:2017-7-11
-# anthor:Alex
-
-'''
-拉钩网爬虫，按照职业关键词和城市为主要参数提取信息
-文件分为3块，本文件是爬虫块，负责主要爬虫功能；
-Setting.py是设置文件，主要负责构造headers；
-Savedata.py是数据处理文件，负责将提取到数据存储到（Excel表格）数据库中
-'''
+# anthor:hxf
 
 import requests
 import json
@@ -15,12 +8,7 @@ from urllib.parse import quote
 from bs4 import BeautifulSoup
 
 from jobfinder.lagou.config import myheaders
-from jobfinder.lagou.savedata import myexcel
 from jobfinder.models import JobList
-
-import django
-
-django.setup()
 
 
 class myspider(object):
@@ -30,7 +18,6 @@ class myspider(object):
         self.key = mykey
         self.city = mycity
         # 获取自定义请求头
-
         self.headers = myheaders.get_headers(mykey, mycity)
         # 获取表格类
         self.excel = myexcel(mykey, mycity)
@@ -79,8 +66,6 @@ class myspider(object):
                 , pubdate=data["createTime"]
                 , url=link
             )
-            # self.excel.writeinfos(self.i, each)
-            # self.i += 1
             job.save()
 
     # 循环获取所有页面的信息
@@ -88,16 +73,5 @@ class myspider(object):
         nums = self.get_pages()
         for n in range(1, nums + 1):
             self.get_one_html(n)
-            print("总计{}页职位信息，已经成功写入{}页的信息到表格".format(nums, n))
-        # self.excel.save_excel()
-        print("所有信息保存完毕！")
-
-# if __name__ == '__main__':
-#     # 城市为空的时候代表全国
-#     spider = myspider("Python", "深圳")
-#     job_type=['java','python','php','go','前端','ruby','大数据']
-#     city_area=['武汉','北京','上海','广州','深圳','杭州']
-#     for job in job_type:
-#         for city in city_area:
-#             spider = myspider(job, city)
-#             spider.main()
+            print("总计{}页职位信息，已经成功写入{}页的信息到数据库".format(nums, n))
+        print("该品类所有信息保存完毕！")
